@@ -55,20 +55,6 @@ services:
         networks:
             - lux_network
 
-    lux_rabbitmq:
-        image: rabbitmq:management
-        restart: always
-        environment:
-            - RABBITMQ_DEFAULT_USER=${AMQP_USER}
-            - RABBITMQ_DEFAULT_PASS=${AMQP_PASSWORD}
-        volumes:
-            - rabbitmq_storage:/var/lib/rabbitmq/
-        ports:
-            - "15674:15672"
-            - "5674:5672"
-        networks:
-            - lux_network
-
     lux_adminer:
         image: adminer
         container_name: lux_adminer
@@ -81,11 +67,19 @@ services:
         networks:
             - lux_network
 
-#    lux_swagger_ui:
-#        image: swaggerapi/swagger-ui
-#        networks:
-#            - lux_network
-#        ports:
-#            - "8092:8080"
-#        environment:
-#            URL: http://localhost/docs
+    lux_queue:
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+            args:
+                ENVIRONMENT: development
+                GROUP_ID: 1000
+                USER_ID: 1000
+        container_name: lux_queue
+        depends_on:
+            - lux_api
+        volumes:
+            - ./:/var/www/html
+        networks:
+            - lux_network
+        command: php artisan queue:work --sleep=3 --tries=3
