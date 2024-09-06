@@ -8,6 +8,16 @@ git clone git@github.com:angeluss88/lux_qua_test.git
 cd lux_qua_test
 cp ./.env.example .env
 ```
+- ### Install [Composer](https://getcomposer.org/) if don't have
+- ### Run
+```
+composer install
+```
+- ### Run
+```
+php artisan key:generate
+```
+- ### Install [Docker](https://www.docker.com/products/docker-desktop/) if don't have
 - ### Build docker images 
 ```
 docker-compose build --no-cache

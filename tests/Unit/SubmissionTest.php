@@ -20,7 +20,7 @@ class SubmissionTest extends TestCase
         $this->service = new SubmissionService($this->submissionRepository);
     }
 
-    public function test_example(): void
+    public function test_store(): void
     {
         $dto = new SubmissionStoreDTO('name', 'email', 'message');
         $this->assertNull($this->submissionRepository->store($dto));
