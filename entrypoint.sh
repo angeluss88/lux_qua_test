@@ -5,6 +5,8 @@ until nc -z -v -w30 lux_db 3306; do
   sleep 5
 done
 
+composer install
+
 # Выполняем миграции
 php artisan migrate --force
 

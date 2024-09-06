@@ -5,11 +5,9 @@ ARG GROUP_ID
 ARG USER_ID
 ARG COMPOSER_VERSION=2.3.10
 
-RUN apk update
-RUN apk upgrade
-
-RUN apk add --no-cache linux-headers
-RUN apk add \
+RUN apk update && apk upgrade && \
+    apk add --no-cache \
+    linux-headers \
     mysql-client \
     libpng-dev \
     mysql-dev \
@@ -29,13 +27,9 @@ RUN docker-php-ext-configure gd \
     && docker-php-ext-install gd
 
 RUN docker-php-ext-install pdo_mysql
-RUN docker-php-ext-install pcntl
-RUN docker-php-ext-install zip
-RUN docker-php-ext-install bcmath
-
-#RUN if [ "$ENVIRONMENT" = "development" ]; then \
-#      pecl install xdebug && docker-php-ext-enable xdebug; \
-#    fi
+#RUN docker-php-ext-install pcntl
+#RUN docker-php-ext-install zip
+#RUN docker-php-ext-install bcmath
 
 RUN if ! getent group www-data >/dev/null; then \
       addgroup -g ${GROUP_ID} www-data; \
