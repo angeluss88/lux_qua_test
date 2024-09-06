@@ -1,7 +1,31 @@
+# Setting up the project
+- ### Clone the repo 
+```
+git clone git@github.com:angeluss88/lux_qua_test.git
+```
+- ### Create configuration file
+```
+cd lux_qua_test
+cp ./.env.example .env
+```
+- ### Build docker images 
+```
 docker-compose build --no-cache
+```
+- ### Run docker containers 
+ ```
+- docker-compose up
+- ```
+- ### Access API via URL [http://localhost:86](http://localhost:86/)
 
-docker-compose up
+# Run tests
+```docker-compose run --rm lux_tests```
 
+# Explanation about API:
+You have two routes:
+- POST ```/api/submission``` to add new submission
+- GET ```/api/submission``` to view all submissions
 
-docker-compose run --rm lux_tests
+# Adminer
+You also can access adminer via link: [http://localhost:8888/](http://localhost:8888/?server=lux_db)
 
