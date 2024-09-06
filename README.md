@@ -14,8 +14,8 @@ docker-compose build --no-cache
 ```
 - ### Run docker containers 
  ```
-- docker-compose up
-- ```
+docker-compose up
+ ```
 - ### Access API via URL [http://localhost:86](http://localhost:86/)
 
 # Run tests
