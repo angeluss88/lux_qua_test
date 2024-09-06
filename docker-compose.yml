@@ -83,3 +83,17 @@ services:
         networks:
             - lux_network
         command: php artisan queue:work --sleep=3 --tries=3
+
+    lux_tests:
+        build:
+            context: .
+            dockerfile: ./tests/Dockerfile
+        container_name: lux_tests
+        entrypoint: [ "./vendor/bin/phpunit" ]
+        volumes:
+            - .:/var/www/html
+        depends_on:
+            - lux_db
+
+        networks:
+            - lux_network
